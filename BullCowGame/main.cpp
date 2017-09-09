@@ -42,10 +42,8 @@ int32 main(int32 argc, const char * argv[])
 
 void PrintIntro()
 {
-    // introduce the game
-    constexpr int32 WORD_LENGTH = 5;
-    std::cout << "Welcome to Bulls and Cows, a fun game." << std::endl;
-    std::cout << "Can you guess the " << WORD_LENGTH;
+    std::cout << "Welcome to Bulls and Cows, a fun game.\n" << std::endl;
+    std::cout << "Can you guess the " << BCGame.GetHiddenWordLength();
     std::cout << " letter isogram I'm thinking of?" << std::endl;
     std::cout << std::endl;
     return;
@@ -68,7 +66,7 @@ void PlayGame()
         std::cout << "Bulls = " << BullCowCount.Bulls << std::endl;
         std::cout << "Cows = " << BullCowCount.Cows << std::endl;
         
-        std::cout << "Your guess was: " << Guess << std::endl;
+        //std::cout << "Your guess was: " << Guess << std::endl;
         std::cout << std::endl;
     }
     
