@@ -37,6 +37,8 @@ public:
     
     void Reset();
     bool CheckGuessValidity(FString); // TODO make a more rich return value.
+    
+    // counts bulls and cows, and increases try # assuming valid guess
     BullCowCount SubmitGuess(FString);
     
 // ^^ Please try and ignore this and focus on the interface above ^^
@@ -44,4 +46,5 @@ private:
     // see constructor for initilization
     int32 MyCurrentTry;
     int32 MyMaxTries;
+    FString MyHiddenWord;
 };

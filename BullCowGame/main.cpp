@@ -15,7 +15,7 @@
 #include <string>
 #include "FBullCowGame.hpp"
 
-//using FTest = std::string;
+//using FString = std::string;
 //using int32 = int;
 
 void PrintIntro();
