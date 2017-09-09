@@ -8,21 +8,26 @@
 
 #include <iostream>
 #include <string>
-
-using namespace std;
+#include "FBullCowGame.hpp"
 
 void PrintIntro();
-void PrintGame();
-string GetGuess();
+void PlayGame();
+std::string GetGuess();
 bool AskToPlayAgain();
+
+FBullCowGame BCGame; // instantiate a new game
 
 
 // the entry point for our application
 int main(int argc, const char * argv[])
 {
-    PrintIntro();
-    PrintGame();
-    AskToPlayAgain();
+    do
+    {
+        PrintIntro();
+        PlayGame();
+    }
+    while (AskToPlayAgain());
+    
     return 0;
 }
 
@@ -31,36 +36,45 @@ void PrintIntro()
 {
     // introduce the game
     constexpr int WORLD_LENGTH = 5;
-    cout << "Welcome to Bulls and Cows, a fun game." << endl;
-    cout << "Can you guess the " << WORLD_LENGTH;
-    cout << " letter isogram I'm thinking of?" << endl;
-    cout << endl;
+    std::cout << "Welcome to Bulls and Cows, a fun game." << std::endl;
+    std::cout << "Can you guess the " << WORLD_LENGTH;
+    std::cout << " letter isogram I'm thinking of?" << std::endl;
+    std::cout << std::endl;
     return;
 }
 
-void PrintGame()
+void PlayGame()
 {
+    int MaxTries = BCGame.GetMaxTries();
+    std::cout << MaxTries << std::endl;
+    
     constexpr int NUMBER_OF_TURNS = 5;
     for(int i = 0; i < NUMBER_OF_TURNS; i++)
     {
-        string Guess = GetGuess();
+        std::string Guess = GetGuess();
         
         // repeat the guess back to them
-        cout << "Your guess was: " << Guess << endl;
-        cout << endl;
+        std::cout << "Your guess was: " << Guess << std::endl;
+        std::cout << std::endl;
     }
 }
 
-string GetGuess()
+std::string GetGuess()
 {
+    int CurrentTry = BCGame.GetCurrentTry();
+    
     // get a guess from the player
-    cout << "Enter your guess: ";
-    string Guess = "";
-    getline(cin,Guess);
+    std::cout << "Try: " << CurrentTry << ". Enter your guess: ";
+    std::string Guess = "";
+    std::getline(std::cin,Guess);
 
     return Guess;
 }
 
-bool AskToPlayAgain(){
-    return false;
+bool AskToPlayAgain()
+{
+    std::cout << "Do you want to play again? (y/n)";
+    std::string Response = "";
+    std::getline(std::cin, Response);
+    return (Response[0] == 'y') || (Response[0] == 'Y');
 }
