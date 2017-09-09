@@ -6,27 +6,35 @@
 //  Copyright © 2017 Takuo Yoneda. All rights reserved.
 //
 
+/* This is the console executable, that makes use of the BullCow class
+ This acts as the view in a MVC pattern, and is responsible for all 
+ user interaction. For game logic see the FBullCowGame class.
+ */
+
 #include <iostream>
 #include <string>
 #include "FBullCowGame.hpp"
 
+//using FTest = std::string;
+//using int32 = int;
+
 void PrintIntro();
 void PlayGame();
-std::string GetGuess();
+FString GetGuess();
 bool AskToPlayAgain();
 
 FBullCowGame BCGame; // instantiate a new game
 
-
 // the entry point for our application
-int main(int argc, const char * argv[])
+int32 main(int32 argc, const char * argv[])
 {
-    do
-    {
+    bool bPlayAgain = false;
+    do {
         PrintIntro();
         PlayGame();
+        bPlayAgain = AskToPlayAgain();
     }
-    while (AskToPlayAgain());
+    while (bPlayAgain);
     
     return 0;
 }
@@ -35,9 +43,9 @@ int main(int argc, const char * argv[])
 void PrintIntro()
 {
     // introduce the game
-    constexpr int WORLD_LENGTH = 5;
+    constexpr int32 WORD_LENGTH = 5;
     std::cout << "Welcome to Bulls and Cows, a fun game." << std::endl;
-    std::cout << "Can you guess the " << WORLD_LENGTH;
+    std::cout << "Can you guess the " << WORD_LENGTH;
     std::cout << " letter isogram I'm thinking of?" << std::endl;
     std::cout << std::endl;
     return;
@@ -45,27 +53,31 @@ void PrintIntro()
 
 void PlayGame()
 {
-    int MaxTries = BCGame.GetMaxTries();
-    std::cout << MaxTries << std::endl;
+    BCGame.Reset();
+    int32 MaxTries = BCGame.GetMaxTries();
+    //std::cout << MaxTries << std::endl;
     
-    constexpr int NUMBER_OF_TURNS = 5;
-    for(int i = 0; i < NUMBER_OF_TURNS; i++)
+    for(int32 i = 1; i <= MaxTries; i++)
     {
-        std::string Guess = GetGuess();
+        FString Guess = GetGuess(); // TODO: make loop cheking valid
         
-        // repeat the guess back to them
+        // submit valid guess to the game
+        // print number of bulls and cows
+        
         std::cout << "Your guess was: " << Guess << std::endl;
         std::cout << std::endl;
     }
+    
+    // TODO: summarise game
 }
 
-std::string GetGuess()
+FString GetGuess()
 {
-    int CurrentTry = BCGame.GetCurrentTry();
+    int32 CurrentTry = BCGame.GetCurrentTry();
     
     // get a guess from the player
     std::cout << "Try: " << CurrentTry << ". Enter your guess: ";
-    std::string Guess = "";
+    FString Guess = "";
     std::getline(std::cin,Guess);
 
     return Guess;
@@ -74,7 +86,7 @@ std::string GetGuess()
 bool AskToPlayAgain()
 {
     std::cout << "Do you want to play again? (y/n)";
-    std::string Response = "";
+    FString Response = "";
     std::getline(std::cin, Response);
     return (Response[0] == 'y') || (Response[0] == 'Y');
 }

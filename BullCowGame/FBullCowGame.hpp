@@ -17,18 +17,31 @@
 #pragma once
 #include <string>
 
-class FBullCowGame {
+using FString = std::string;
+using int32 = int;
+
+struct BullCowCount
+{
+    int32 Bulls = 0;
+    int32 Cows = 0;
+};
+
+class FBullCowGame
+{
 public:
-    int GetMaxTries() const;
-    int GetCurrentTry() const;
+    FBullCowGame(); // constructor
+    
+    int32 GetMaxTries() const;
+    int32 GetCurrentTry() const;
     bool IsGameWon() const;
     
-    void Reset(); // TODO make a more rich return value.
-    bool CheckGuessValidity(std::string); // TODO make a more rich return value.
-    
+    void Reset();
+    bool CheckGuessValidity(FString); // TODO make a more rich return value.
+    BullCowCount SubmitGuess(FString);
     
 // ^^ Please try and ignore this and focus on the interface above ^^
 private:
-    int MyCurrentTry = 1;
-    int MyMaxTries = 10;
+    // see constructor for initilization
+    int32 MyCurrentTry;
+    int32 MyMaxTries;
 };
