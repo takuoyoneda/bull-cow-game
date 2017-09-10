@@ -60,7 +60,7 @@ void PlayGame()
         FString Guess = GetValidGuess(); // TODO: make loop cheking valid
         
         // submit valid guess to the game
-        FBullCowCount BullCowCount = BCGame.SubmitGuess(Guess);
+        FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
         
         std::cout << "Bulls = " << BullCowCount.Bulls << ". ";
         std::cout << "Cows = " << BullCowCount.Cows << "\n\n";
@@ -71,8 +71,8 @@ void PlayGame()
 
 FString GetValidGuess()
 {
-    EGuessStatus Status = EGuessStatus::Invalid_Status;
     FString Guess = "";
+    EGuessStatus Status = EGuessStatus::Invalid_Status;
     
     do {
         // get a guess from the player
