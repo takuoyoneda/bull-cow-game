@@ -7,6 +7,10 @@
 //
 
 #include "FBullCowGame.hpp"
+#include <map>
+#define TMap std::map
+
+//using int32 = int;
 
 FBullCowGame::FBullCowGame() { Reset(); }
 
@@ -17,8 +21,8 @@ bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
 void FBullCowGame::Reset()
 {
-    constexpr int32 MAX_TRIES = 5;
-    const FString HIDDEN_WORD =  "donkey";
+    constexpr int32 MAX_TRIES = 4;
+    const FString HIDDEN_WORD =  "last";
     
     MyMaxTries = MAX_TRIES;
     MyHiddenWord = HIDDEN_WORD;
@@ -29,7 +33,7 @@ void FBullCowGame::Reset()
 
 EGuessStatus FBullCowGame::CheckGuessValidity(FString Guess) const
 {
-    if(false)
+    if(!IsIsogram(Guess))
     {
         return EGuessStatus::Not_Isogram;
     }
@@ -85,3 +89,9 @@ FBullCowCount FBullCowGame::SubmitValidGuess(FString Guess)
     return BullCowCount;
 }
 
+bool FBullCowGame::IsIsogram(FString Word) const
+{
+    
+    
+    return true;
+}
