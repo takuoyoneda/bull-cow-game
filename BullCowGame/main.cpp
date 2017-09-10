@@ -42,7 +42,7 @@ int32 main(int32 argc, const char * argv[])
 
 void PrintIntro()
 {
-    std::cout << "Welcome to Bulls and Cows, a fun game.\n" << std::endl;
+    std::cout << "\n\nWelcome to Bulls and Cows, a fun game.\n" << std::endl;
     std::cout << "Can you guess the " << BCGame.GetHiddenWordLength();
     std::cout << " letter isogram I'm thinking of?" << std::endl;
     std::cout << std::endl;
@@ -53,9 +53,8 @@ void PlayGame()
 {
     BCGame.Reset();
     int32 MaxTries = BCGame.GetMaxTries();
-    //std::cout << MaxTries << std::endl;
     
-    for(int32 i = 1; i <= MaxTries; i++)
+    while(!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries)
     {
         FString Guess = GetValidGuess(); // TODO: make loop cheking valid
         
