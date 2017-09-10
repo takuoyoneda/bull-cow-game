@@ -11,23 +11,27 @@
  user interaction. For game logic see the FBullCowGame class.
  */
 
+//#pragma once
+
 #include <iostream>
 #include <string>
 #include "FBullCowGame.hpp"
 
-//using FString = std::string;
-//using int32 = int;
+// to make syntax Unreal friendly
+using FText = std::string;
+using int32 = int;
 
+// function prototypes as outside a class
 void PrintIntro();
 void PlayGame();
-FString GetValidGuess();
+FText GetValidGuess();
 bool AskToPlayAgain();
 void PrintGameSummary();
 
-FBullCowGame BCGame; // instantiate a new game
+FBullCowGame BCGame; // instantiate a new game, which we re-use across plays
 
 // the entry point for our application
-int32 main(int32 argc, const char * argv[])
+int main()
 {
     bool bPlayAgain = false;
     do {
@@ -37,7 +41,7 @@ int32 main(int32 argc, const char * argv[])
     }
     while (bPlayAgain);
     
-    return 0;
+    return 0; // exit the application
 }
 
 
@@ -57,9 +61,9 @@ void PlayGame()
     
     while(!BCGame.IsGameWon() && BCGame.GetCurrentTry() <= MaxTries)
     {
-        FString Guess = GetValidGuess(); // TODO: make loop cheking valid
+        FText Guess = GetValidGuess();
         
-        // submit valid guess to the game
+        // submit valid guess to the game, and receive counts
         FBullCowCount BullCowCount = BCGame.SubmitValidGuess(Guess);
         
         std::cout << "Bulls = " << BullCowCount.Bulls << ". ";
@@ -71,9 +75,9 @@ void PlayGame()
     return;
 }
 
-FString GetValidGuess()
+FText GetValidGuess()
 {
-    FString Guess = "";
+    FText Guess = "";
     EGuessStatus Status = EGuessStatus::Invalid_Status;
     
     do {
@@ -99,7 +103,7 @@ FString GetValidGuess()
                 break;
                 
             default:
-                return Guess;
+                break;
         }
         
     } while (Status != EGuessStatus::OK);
@@ -110,7 +114,7 @@ FString GetValidGuess()
 bool AskToPlayAgain()
 {
     std::cout << "Do you want to play again with the same hidden word? (y/n)";
-    FString Response = "";
+    FText Response = "";
     std::getline(std::cin, Response);
     return (Response[0] == 'y') || (Response[0] == 'Y');
 }

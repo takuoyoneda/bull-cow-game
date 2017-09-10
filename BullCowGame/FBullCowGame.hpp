@@ -6,12 +6,13 @@
 //  Copyright © 2017 Takuo Yoneda. All rights reserved.
 //
 
-#ifndef FBullCowGame_hpp
-#define FBullCowGame_hpp
 
-#include <stdio.h>
+//#ifndef FBullCowGame_hpp
+//#define FBullCowGame_hpp
 
-#endif /* FBullCowGame_hpp */
+//#include <stdio.h>
+
+//#endif /* FBullCowGame_hpp */
 
 
 #pragma once

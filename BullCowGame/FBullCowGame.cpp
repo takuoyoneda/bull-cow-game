@@ -6,26 +6,36 @@
 //  Copyright © 2017 Takuo Yoneda. All rights reserved.
 //
 
+#pragma once
+
 #include "FBullCowGame.hpp"
 #include <map>
+
+// to make syntax Unreal friendly
 #define TMap std::map
+using int32 = int;
 
-//using int32 = int;
+FBullCowGame::FBullCowGame() { Reset(); } // default constructor
 
-FBullCowGame::FBullCowGame() { Reset(); }
-
-int32 FBullCowGame::GetMaxTries() const { return MyMaxTries; }
 int32 FBullCowGame::GetCurrentTry() const { return MyCurrentTry; }
 int32 FBullCowGame::GetHiddenWordLength() const { return (int32) MyHiddenWord.length(); }
 bool FBullCowGame::IsGameWon() const { return bGameIsWon; }
 
+int32 FBullCowGame::GetMaxTries() const
+{
+    TMap<int32, int32> WordLengthToMaxTries
+    {
+        {3,4},{4,7},{5,10},{6,16},{7,20}
+    };
+    
+    return WordLengthToMaxTries[(int32)MyHiddenWord.length()];
+}
+
 void FBullCowGame::Reset()
 {
-    constexpr int32 MAX_TRIES = 4;
-    const FString HIDDEN_WORD =  "last";
-    
-    MyMaxTries = MAX_TRIES;
+    const FString HIDDEN_WORD =  "last"; // this MUST be an isogram
     MyHiddenWord = HIDDEN_WORD;
+    
     MyCurrentTry = 1;
     bGameIsWon = false;
     return;
