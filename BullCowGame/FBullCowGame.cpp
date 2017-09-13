@@ -6,7 +6,7 @@
 //  Copyright © 2017 Takuo Yoneda. All rights reserved.
 //
 
-#pragma once
+//#pragma once
 
 #include "FBullCowGame.hpp"
 #include <map>
